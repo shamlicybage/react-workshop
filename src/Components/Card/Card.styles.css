@@ -1,0 +1,35 @@
+.card {
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    margin: 0.5rem;
+    width: 200px;
+  }
+  
+  .card-text {
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: left;
+  }
+  .BlogCard{
+    margin:16px;
+    padding:16px;
+    box-sizing:border-box;
+    height:500px;
+    border-radius:5px;
+    box-shadow :0 2px 5px #ccc;
+   } 
+
+   .image{
+    max-width: 100%;
+    height: 300px;
+    border-radius:5px;
+    box-shadow :0 2px 5px #ccc;
+    padding:5px;
+  }
+  
+  @media(min-width:992px){
+    .BlogCard{
+      width: 30%;
+      float: left;
+    }
+  }
