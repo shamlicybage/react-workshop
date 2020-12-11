@@ -1,0 +1,54 @@
+.container-create{
+    margin:0 auto;
+    width: 500px;
+    height:400px;
+    padding: 10px;
+    border: 1px solid black;
+    padding-top: 10px;
+    border-radius: 5px;
+    box-shadow :0 2px 5px rgb(63, 62, 62);
+    position: relative;
+    top:20px;
+}
+
+.create-new {
+    margin: auto;
+    /* max-width: 1080px;
+    padding: 0.5rem; */
+  }
+  
+  .create-new label {
+    display: block;
+  }
+  
+  .create-new input,
+  .create-new select,
+  .create-new textarea {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .create-new textarea {
+    height: 200px;
+    box-shadow :0 2px 5px rgb(63, 62, 62);
+  }
+
+  .create-new-blog{
+    height: 35px;
+    width: 500px;
+    
+    border-radius: 15px;
+    background-color: #333;
+    color:white;
+    font-size: smaller;
+    box-shadow :0 2px 5px rgb(63, 62, 62);
+  }
+  .create-new-blog h1{
+    text-align: center;
+  }
+  
+  
+  .control-wrapper {
+    margin-bottom: 1rem;
+  }
+  

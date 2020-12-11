@@ -1,11 +1,8 @@
-.filters {
-    padding: 0 0.5rem;
-    
-    margin: 5px;
-  }
-
-  .filters select{
+.search input{
     border-radius: 6px;
     height: 20px;
+    position:absolute;
+    right:30px;
+    margin: 5px;
     box-shadow :0 2px 5px rgb(63, 62, 62);
-  }
+}

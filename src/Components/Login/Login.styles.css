@@ -1,0 +1,62 @@
+.container{
+    margin:auto;
+    position: relative;
+    top:50px;
+    width: 500px;
+    height:300px;
+    padding: 10px;
+    border: 1px solid black;
+    padding-top: 10px;
+    border-radius: 5px;
+    box-shadow :0 2px 5px rgb(63, 62, 62);
+}
+.container h1{
+  text-align: center;
+}
+.create-new {
+    margin: auto;
+    
+  }
+  
+  .create-new label {
+    display: block;
+  }
+  
+  .create-new input
+  {
+    width: 100%;
+    border-radius: 4px;
+    height: 40px;
+    box-shadow :0 2px 5px rgb(63, 62, 62);
+    
+  }
+  .create-new button{
+    position: relative;
+    left:39%;
+    height: 40px;
+    width: 70px;
+    border-radius: 15px;
+    background-color:#333;
+    color:white;
+    font-size: large;
+    box-shadow :0 2px 5px rgb(63, 62, 62);
+  }
+  .login{
+    height: 60px;
+    width: 500px;
+    
+    border-radius: 15px;
+    background-color: #333;
+    color:white;
+    font-size: medium;
+    box-shadow :0 2px 5px rgb(63, 62, 62);
+  }
+  
+  
+
+  
+  
+  .control-wrapper {
+    margin-bottom: 1rem;
+  }
+  

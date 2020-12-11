@@ -1,33 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
+import {BrowserRouter,Switch,Route} from 'react-router-dom';
 import Header from "../Header";
 import BlogPosts from "../BlogPosts";
 import CreateNew from "../CreateNew";
-import blogPostsData from "./data";
 import Footer from "../Footer"
+import Login from "../Login/Login";
+import {LoginContext} from '../Login/LoginContext'
 
 export default function App() {
-  const [nav, setNav] = useState("home");
-  const [blogs, setBlogs] = useState(blogPostsData);
+  const [blogs, setBlogs] = useState([]);
+  const login = useState(false)
+ 
+  //=================Fetch the blogs from data.json file================
+  useEffect(() => {
+    
+      fetch("/data.json")
+      .then(resp=>resp.json())
+      .then(data=>setBlogs(data))
+  }, []);
 
-  function handleNavClick(value) {
-    const updatedNav = value === nav ? null : value;
-    setNav(updatedNav);
-  }
-
+//============================Set blogs after creating new blog===================
   function handleCreateNew(newBlog) {
     setBlogs([newBlog, ...blogs]);
-    setNav("home");
+    
   }
-
+  
   return (
     <>
-      <Header onNavClick={handleNavClick} />
-      {nav === "createNew" ? (
-        <CreateNew onSubmit={handleCreateNew} />
-      ) : (
-        <BlogPosts blogs={blogs} />
-      )}
-      <Footer/>
+    <BrowserRouter>
+      <div className="app">
+        {/*================Header===================== */}
+        
+         <LoginContext.Provider value={login}>
+           <Header/>
+          <Switch>
+          {/*================Routes===================== */}
+          {/*================Home===================== */}
+          <Route exact path="/">
+            <BlogPosts blogs={blogs} />
+          </Route>
+          {/*================Create Blog===================== */}
+          <Route path="/create">
+            <CreateNew
+            onSubmit={handleCreateNew}/>
+          </Route>
+          {/*================Login===================== */}
+          <Route exact path="/login">
+            <Login/>
+           </Route>
+         </Switch>
+         {/*================Footer===================== */}
+        <Footer/>
+        </LoginContext.Provider>
+      </div>
+      </BrowserRouter>
     </>
   );
 }

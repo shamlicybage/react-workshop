@@ -24,11 +24,12 @@ body {
   margin: 0.5rem;
 }
 
-.header .nav button {
+.header .nav .links {
   background: none;
   border: none;
   margin: 0 0.5rem 0 0;
   color:white;
+  list-style: none;
 }
 
 

@@ -1,31 +1,41 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import {Link} from 'react-router-dom';
+
 import "./Header.styles.css";
-import PropTypes from "prop-types"
+import Logout from '../Logout/Logout'
+import { LoginContext } from "../Login/LoginContext";
 
-function Header({onNavClick}) {
 
-  
+
+
+function Header() {
+  const [isLoggedIn,setLogin]=useContext(LoginContext)
   return (
     <div className="header">
       <div className="header-bar">
         <h1>BlogIt</h1>
 
         <div className="nav">
-          
-          <button type="button" onClick={() => onNavClick("home")}>
-            Home
-          </button>
-          <button type="button" onClick={() => onNavClick("createNew")}>
-            Create New
-          </button>
-        </div>
+          {/*================Home===================== */}
+        <Link className="links" to="/">Home</Link>
+        {isLoggedIn ? (
+          <>
+            <Link className="links" to="/create">Create New</Link>
+            {/*================Logout===================== */}
+            <Logout login={isLoggedIn}/>
+          </>
+            
+          ) : (
+            <>
+            {/*================Login===================== */}
+            <Link className="links" to="/login">Login</Link>
+            </>
+          )}
+         </div>
       </div>
     </div>
   );
 }
 
-Header.propTypes = {
-  onNavClick: PropTypes.func.isRequired
-};
 
 export default Header;

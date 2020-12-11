@@ -1,17 +1,41 @@
-import React, { useState } from "react";
+import React, { useState ,useRef, useEffect, useContext} from "react";
+import {useHistory} from 'react-router-dom'
+import './CreateNew.style.css';
+import withLogin from '../Login/withLogin'
 
 
-function CreateNew({ onSubmit }){
+function CreateNew({ onSubmit,isLoggedIn}){
+  
+  //==================Ref for focus on input Fields=============
+  const urlRef=useRef()
+  const blogTextRef=useRef()
+  //===================History==================================
+  const history = useHistory()
+
   const [formData, setFormData] = useState({
     type: "text",
     content: ""
   });
 
+  useEffect(()=>{
+    if(!isLoggedIn){
+      console.log("not Logged in");
+      history.push("/")
+    }
+    //===============Unmount the component after creating the blog================
+    return () => {
+      console.log("Unmounting Create New Component");
+    };
+  },[isLoggedIn])
+
+  //============================set the Form data on InputChange===================
   function handleInputChange({ target }) {
     const { name, value } = target;
     setFormData({ ...formData, [name]: value });
+    
   }
 
+  //===========================Form Submit Function============================
   function handleFormSubmit(e) {
     e.preventDefault();
 
@@ -28,11 +52,14 @@ function CreateNew({ onSubmit }){
     };
 
     onSubmit(postData);
+    history.push("/")
   }
 
   const { content, type } = formData;
 
   return (
+    <div className="container-create">
+      <div className="create-new-blog"><h1>Create New Blog</h1></div>
     <form className="create-new" onSubmit={handleFormSubmit}>
       <div className="control-wrapper">
         <label>Content Type</label>
@@ -41,31 +68,39 @@ function CreateNew({ onSubmit }){
           <option value="text">Text</option>
         </select>
       </div>
-
+    {/*===============Render required component according to content type=============  */}
       {type === "image" ? (
         <div className="control-wrapper">
           <label>Image URL</label>
           <input
+            ref={urlRef}
             name="content"
             type="text"
             value={content}
             onChange={handleInputChange}
+            required
+            
           />
         </div>
       ) : (
         <div className="control-wrapper">
           <label>Blog Text</label>
           <textarea
+            ref={blogTextRef}
             name="content"
             value={content}
             onChange={handleInputChange}
+            required
+            maxLength="200"
           />
         </div>
       )}
-
+     
       <button type="Submit">Submit</button>
     </form>
+    </div>
   );
 }
 
-export default CreateNew
+//=================Enclosed CreateNew Component in HOC withLogin======================
+export default withLogin(CreateNew)

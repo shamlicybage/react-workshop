@@ -1,11 +1,13 @@
 import React from "react";
 import "./Filters.styles.css";
 
-function Filters({ onFilterChange }) {
+
+function Filters({ onFilterChange,filters }) {
   return (
     <div className="filters">
+      
       <label>Filter by Content: </label>
-      <select name="type" onChange={onFilterChange}>
+      <select name="type" value={filters.type} onChange={onFilterChange}>
         <option value="">All</option>
         <option value="image">Image</option>
         <option value="text">Text</option>
