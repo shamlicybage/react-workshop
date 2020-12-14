@@ -4,11 +4,11 @@ import "./Filters.styles.css";
 
 function Filters({ onFilterChange,filters }) {
   return (
-    <div className="filters">
+    <div className="filters" data-test="filter-component">
       
       <label>Filter by Content: </label>
-      <select name="type" value={filters.type} onChange={onFilterChange}>
-        <option value="">All</option>
+      <select name="type" value={filters.type} onChange={onFilterChange} data-test="content-type">
+        <option value="" data-test="all">All</option>
         <option value="image">Image</option>
         <option value="text">Text</option>
       </select>
