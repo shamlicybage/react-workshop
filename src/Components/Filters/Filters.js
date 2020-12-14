@@ -4,7 +4,7 @@ import "./Filters.styles.css";
 
 function Filters({ onFilterChange,filters }) {
   return (
-    <div className="filters" data-test="filter-component">
+    <div className="filters" data-testid="filter-component">
       
       <label>Filter by Content: </label>
       <select name="type" value={filters.type} onChange={onFilterChange} data-test="content-type">
