@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import {Link} from 'react-router-dom';
-
+import {connect} from 'react-redux';
 import "./Header.styles.css";
 import Logout from '../Logout/Logout'
-import { LoginContext } from "../Login/LoginContext";
 
 
 
 
-function Header() {
-  const [isLoggedIn,setLogin]=useContext(LoginContext)
+
+function Header(props) {
+  
   return (
     <div className="header">
       <div className="header-bar">
@@ -18,17 +18,18 @@ function Header() {
         <div className="nav">
           {/*================Home===================== */}
         <Link className="links" to="/">Home</Link>
-        {isLoggedIn ? (
+        {props.isLoggedIn ? (
           <>
             <Link className="links" to="/create">Create New</Link>
             {/*================Logout===================== */}
-            <Logout login={isLoggedIn}/>
+            <Logout/>
           </>
             
           ) : (
             <>
             {/*================Login===================== */}
             <Link className="links" to="/login">Login</Link>
+            
             </>
           )}
          </div>
@@ -36,6 +37,8 @@ function Header() {
     </div>
   );
 }
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.isLoggedIn,
+});
 
-
-export default Header;
+export default connect(mapStateToProps)(Header);

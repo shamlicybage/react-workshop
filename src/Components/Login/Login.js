@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react'
 import './Login.styles.css'
 import {useHistory} from 'react-router-dom'
 import withLogin from './withLogin'
+import {connect} from 'react-redux'
 
-function Login({isLoggedIn,setLogin}) {
+function Login(props) {
   const history=useHistory();
   const [formData, setFormData] = useState({
         name: "shamli",
@@ -13,9 +14,12 @@ function Login({isLoggedIn,setLogin}) {
   //=================Login Submit Function===========================
     function handleFormSubmit(e) {
         e.preventDefault();
-        setLogin(true)
-        console.log(isLoggedIn);
+        props.dispatch({
+          type: "setLoggedIn",
+          payload: true,
+        })
         history.push("/")
+
       }
 //========================InputChange Function=======================
       function handleInputChange({ target }) {
@@ -57,4 +61,7 @@ function Login({isLoggedIn,setLogin}) {
     )
 }
 
-export default withLogin(Login)
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.isLoggedIn,
+});
+export default connect(mapStateToProps)(Login)

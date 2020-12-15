@@ -4,8 +4,10 @@ import Avatar from "../Avatar";
 import "./Card.styles.css";
 
 
-function Card({ data }) {
+
+function Card({data}) {
   const { content, type, user } = data;
+ 
 
   return (
     <div className="BlogCard">

@@ -1,10 +1,11 @@
 import React, { useState ,useRef, useEffect, useContext} from "react";
 import {useHistory} from 'react-router-dom'
 import './CreateNew.style.css';
-import withLogin from '../Login/withLogin'
+
+import {connect} from 'react-redux'
 
 
-function CreateNew({ onSubmit,isLoggedIn}){
+function CreateNew(props){
   
   //==================Ref for focus on input Fields=============
   const urlRef=useRef()
@@ -17,16 +18,7 @@ function CreateNew({ onSubmit,isLoggedIn}){
     content: ""
   });
 
-  useEffect(()=>{
-    if(!isLoggedIn){
-      console.log("not Logged in");
-      history.push("/")
-    }
-    //===============Unmount the component after creating the blog================
-    return () => {
-      console.log("Unmounting Create New Component");
-    };
-  },[isLoggedIn])
+  
 
   //============================set the Form data on InputChange===================
   function handleInputChange({ target }) {
@@ -50,8 +42,10 @@ function CreateNew({ onSubmit,isLoggedIn}){
       id,
       user
     };
-
-    onSubmit(postData);
+    props.dispatch({
+      type:"AddCard",
+      payload:postData
+    })
     history.push("/")
   }
 
@@ -102,5 +96,10 @@ function CreateNew({ onSubmit,isLoggedIn}){
   );
 }
 
-//=================Enclosed CreateNew Component in HOC withLogin======================
-export default withLogin(CreateNew)
+const mapStateToProps = (state) => ({
+  postData: state.postData,
+  isLoggedIn:state.isLoggedIn
+});
+
+
+export default connect(mapStateToProps)(CreateNew)
