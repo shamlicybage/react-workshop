@@ -1,17 +1,10 @@
-function BlogPostReducer(state=[],action){
-    if(action.type ==='setBlogs')
-        return action.payload;
-    
-    
+function BlogPostReducer(state = [], action) {
+  if (action.type === "setBlogs") return action.payload;
 
+  if (action.type === "AddCard") {
+    return [action.payload, ...state];
+  }
 
-if(action.type==="AddCard"){
-        
-    return [action.payload,...state];
-}
-    
-
-return state;
-
+  return state;
 }
 export default BlogPostReducer;

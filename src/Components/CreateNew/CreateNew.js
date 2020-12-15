@@ -1,30 +1,25 @@
-import React, { useState ,useRef, useEffect, useContext} from "react";
-import {useHistory} from 'react-router-dom'
-import './CreateNew.style.css';
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import "./CreateNew.style.css";
 
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
-
-function CreateNew(props){
-  
+function CreateNew(props) {
   //==================Ref for focus on input Fields=============
-  const urlRef=useRef()
-  const blogTextRef=useRef()
+  const urlRef = useRef();
+  const blogTextRef = useRef();
   //===================History==================================
-  const history = useHistory()
+  const history = useHistory();
 
   const [formData, setFormData] = useState({
     type: "text",
-    content: ""
+    content: "",
   });
-
-  
 
   //============================set the Form data on InputChange===================
   function handleInputChange({ target }) {
     const { name, value } = target;
     setFormData({ ...formData, [name]: value });
-    
   }
 
   //===========================Form Submit Function============================
@@ -35,71 +30,71 @@ function CreateNew(props){
     const user = {
       id: 1,
       name: "katarina toren",
-      image: "https://randomuser.me/api/portraits/thumb/women/20.jpg"
+      image: "https://randomuser.me/api/portraits/thumb/women/20.jpg",
     };
     const postData = {
       ...formData,
       id,
-      user
+      user,
     };
     props.dispatch({
-      type:"AddCard",
-      payload:postData
-    })
-    history.push("/")
+      type: "AddCard",
+      payload: postData,
+    });
+    history.push("/");
   }
 
   const { content, type } = formData;
 
   return (
     <div className="container-create">
-      <div className="create-new-blog"><h1>Create New Blog</h1></div>
-    <form className="create-new" onSubmit={handleFormSubmit}>
-      <div className="control-wrapper">
-        <label>Content Type</label>
-        <select name="type" value={type} onChange={handleInputChange}>
-          <option value="image">Image</option>
-          <option value="text">Text</option>
-        </select>
+      <div className="create-new-blog">
+        <h1>Create New Blog</h1>
       </div>
-    {/*===============Render required component according to content type=============  */}
-      {type === "image" ? (
+      <form className="create-new" onSubmit={handleFormSubmit}>
         <div className="control-wrapper">
-          <label>Image URL</label>
-          <input
-            ref={urlRef}
-            name="content"
-            type="text"
-            value={content}
-            onChange={handleInputChange}
-            required
-            
-          />
+          <label>Content Type</label>
+          <select name="type" value={type} onChange={handleInputChange}>
+            <option value="image">Image</option>
+            <option value="text">Text</option>
+          </select>
         </div>
-      ) : (
-        <div className="control-wrapper">
-          <label>Blog Text</label>
-          <textarea
-            ref={blogTextRef}
-            name="content"
-            value={content}
-            onChange={handleInputChange}
-            required
-            maxLength="200"
-          />
-        </div>
-      )}
-     
-      <button type="Submit">Submit</button>
-    </form>
+        {/*===============Render required component according to content type=============  */}
+        {type === "image" ? (
+          <div className="control-wrapper">
+            <label>Image URL</label>
+            <input
+              ref={urlRef}
+              name="content"
+              type="text"
+              value={content}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+        ) : (
+          <div className="control-wrapper">
+            <label>Blog Text</label>
+            <textarea
+              ref={blogTextRef}
+              name="content"
+              value={content}
+              onChange={handleInputChange}
+              required
+              maxLength="200"
+            />
+          </div>
+        )}
+
+        <button type="Submit">Submit</button>
+      </form>
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
   postData: state.postData,
-  isLoggedIn:state.isLoggedIn
+  isLoggedIn: state.isLoggedIn,
 });
 
-
-export default connect(mapStateToProps)(CreateNew)
+export default connect(mapStateToProps)(CreateNew);

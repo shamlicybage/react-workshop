@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Filters from "../Filters";
 import { connect } from "react-redux";
-import Search from '../Search';
+import Search from "../Search";
 import { getFilteredBlogs } from "./helpers";
 import Card from "../Card";
 
@@ -28,17 +28,16 @@ function BlogPost(props) {
   const filteredBlogs = getFilteredBlogs(props.blogs, filters, search);
   //=================Fetch the blogs from data.json file================
   useEffect(() => {
-    if(props.blogs.length===0){
+    if (props.blogs.length === 0) {
       fetch("/data.json")
-      .then((resp) => resp.json())
-      .then((data) =>
-        props.dispatch({
-          type: "setBlogs",
-          payload: data,
-        })
-      );
+        .then((resp) => resp.json())
+        .then((data) =>
+          props.dispatch({
+            type: "setBlogs",
+            payload: data,
+          })
+        );
     }
-  
   }, []);
   console.log(props.blogs);
   return (
